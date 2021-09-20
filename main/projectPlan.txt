@@ -1,0 +1,19 @@
+I will apply dimensionality reduction using the matrix factorization methods SVD and PCA, and compare the accuracies of both methods. 
+Both methods are provided in Python’s sci-kit library which will be useful. 
+For this project, I plan to use k-fold cross validation to obtain accuracy. 
+With this method, I do not have to initially split my data into a testing and training set and can instead run cross validation multiple times 
+with different combinations of a test/train split. 
+This way, after averaging the resulting root mean square error, the resulting model estimate will be less biased and I can tune the hyperparameters, 
+such as the dimensionality of my output matrices/number of features to keep, more confidently for a more accurate model.
+
+After calculating the error, I also plan to apply my own stochastic gradient descent algorithm from scratch that will run on the resulting error function 
+in hopes that I can minimize it. 
+Since my dataset is quite large and can cause iterations to be consuming in terms of resources, I plan to begin with average values for my learning rate and epochs. 
+I will plot the results of each iteration and use that data to determine which hyperparameters need to be increased or decreased in order to reach the minimum. 
+By incrementally adjusting weights for prediction, I think that I can get an even more calibrated algorithm that can perform predictions with minimal error. 
+In the end, I plan to measure my success using my resulting RMSE value, which I will then compare with previous values I will calculate in between steps of my plan to improve my algorithm.
+
+One additional problem I believe I will run into is the idea that various users will obviously have different preferences for which types of groceries they prefer to buy. 
+For example, some people might buy more snacks than vegetables, etc. 
+I plan to also initially apply weights to each user’s purchases depending on what percentage of groceries that they purchase fall into each department of the store. 
+I believe this method will help to bring out each user’s individual preferences more rather than analyzing individual purchases.
