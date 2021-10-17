@@ -17,3 +17,8 @@ One additional problem I believe I will run into is the idea that various users 
 For example, some people might buy more snacks than vegetables, etc. 
 I plan to also initially apply weights to each user’s purchases depending on what percentage of groceries that they purchase fall into each department of the store. 
 I believe this method will help to bring out each user’s individual preferences more rather than analyzing individual purchases.
+
+
+Read data
+categorize data
+map relationship between items based on purchases
