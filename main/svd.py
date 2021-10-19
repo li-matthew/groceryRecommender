@@ -10,6 +10,8 @@ from surprise.model_selection import GridSearchCV
 from surprise import Reader
 from surprise import Dataset
 from surprise import KNNBasic
+from collections import defaultdict
+
 
 data = pd.read_csv("csv/manipulated.csv")
 print(data)
@@ -32,17 +34,28 @@ print(data)
 # SURPRISE METHOD
 # Item x Item
 
-# reader = Reader(rating_scale=(1, 5))
-# data = Dataset.load_from_df(
-#     data[["product_name_x", "product_name_y", "match"]], reader
-# )
-# algo = SVD()
-# cross_validate(algo, data, measures=["RMSE", "MAE"], cv=5, verbose=True)
+reader = Reader(rating_scale=(1, data["match"].max()))
+dataset = Dataset.load_from_df(
+    data[["product_name_x", "product_name_y", "match"]], reader
+)
+algo = SVD()
+cross_validate(algo, dataset, measures=["RMSE", "MAE"], cv=5, verbose=True)
 
+# Predictions
+topn = []
+# for x in data.aisle_x.unique():
+#     temp = []
+for y in data.product_name_y.unique():
+    est = algo.predict("Whole Milk", y).est
+    topn.append((y, est))
+topn.sort(key=lambda x: x[1], reverse=True)
+print(topn)
+
+# # Auto parameter
 # param_grid = {"n_epochs": [5, 10], "lr_all": [0.002, 0.005], "reg_all": [0.4, 0.6]}
 # gs = GridSearchCV(SVD, param_grid, measures=["rmse", "mae"], cv=3)
 # gs.fit(data)
 # print(gs.best_score["rmse"])
 
-# # combination of parameters that gave the best RMSE score
+# combination of parameters that gave the best RMSE score
 # print(gs.best_params["rmse"])

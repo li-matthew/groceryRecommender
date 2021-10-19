@@ -24,6 +24,7 @@ df = data.drop(
         "user_id",
         "order_number",
         "order_hour_of_day",
+        "aisle",
     ],
     axis=1,
 )
@@ -40,7 +41,7 @@ for group in df:
     )
     list.append(x)
 total = pd.concat(list)
-
+print(total)
 # Create score for each match
 total["match"] = total.apply(
     lambda row: min(row["reordered_x"], row["reordered_y"]), axis=1
@@ -48,7 +49,13 @@ total["match"] = total.apply(
 total["match"] += 1
 match = total[["match"]]
 total = total.drop(
-    ["reordered_x", "aisle_x", "key_x", "reordered_y", "aisle_y", "key_y", "match"],
+    [
+        "reordered_x",
+        "key_x",
+        "reordered_y",
+        "key_y",
+        "match",
+    ],
     axis=1,
 )
 print(total)
@@ -59,4 +66,7 @@ a.sort(axis=1)
 newtotal = pd.DataFrame(a, total.index, total.columns)
 newtotal["match"] = match
 newtotal = newtotal.sort_values(["product_name_x", "product_name_y"])
+
+newtotal = newtotal.groupby(["product_name_x", "product_name_y"]).sum().reset_index()
+print(newtotal)
 newtotal.to_csv("csv/manipulated.csv", index=False)
