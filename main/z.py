@@ -1,6 +1,4 @@
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 test = pd.read_csv("csv/test.csv")
 products = pd.read_csv("csv/cat4.csv")

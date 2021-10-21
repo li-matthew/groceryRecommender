@@ -1,15 +1,4 @@
 import pandas as pd
-import scipy as sp
-import numpy as np
-from sklearn.decomposition import TruncatedSVD
-import seaborn as sns
-import matplotlib.pyplot as plt
-from surprise import SVD
-from surprise.model_selection import cross_validate
-from surprise.model_selection import GridSearchCV
-from surprise import Reader
-from surprise import Dataset
-from surprise import KNNBasic
 
 # CREATE MATRIX PAIRING PRODUCTS TOGETHER
 

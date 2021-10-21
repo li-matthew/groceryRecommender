@@ -28,3 +28,4 @@ compute predicted values
 standardize data (subtract mean etc)
 calculate RMSE
 Perfrom gradient descent
+graphs with r
