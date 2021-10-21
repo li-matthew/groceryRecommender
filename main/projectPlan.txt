@@ -23,9 +23,12 @@ Read data
 categorize data
 map relationship between items based on purchases
 compute predicted values
+standardize data (subtract mean etc)
 
 #TODO
-standardize data (subtract mean etc)
+PCA+randomforest?
+cross validation
 calculate RMSE
 Perfrom gradient descent
 graphs with r
+weight????

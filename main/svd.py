@@ -14,6 +14,8 @@ from surprise import KNNBasic
 from collections import defaultdict
 from scipy.sparse.linalg import svds
 from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 
 # PERFORM SVD
 
@@ -21,15 +23,20 @@ data = pd.read_csv("csv/manipulated.csv")
 print(data)
 
 # S
-df = pd.DataFrame(
-    index=data.product_name_x.unique(), columns=data.product_name_y.unique()
-)
+df = pd.DataFrame(index=data.aisle_x.unique(), columns=data.aisle_y.unique())
 print(df)
 for index, row in data.iterrows():
     # print(row["product_name"])
-    df.at[row["product_name_x"], row["product_name_y"]] = row["match"]
+    df.at[row["aisle_x"], row["aisle_y"]] = row["match"]
 df = df.fillna(0)
-print(type(df))
+mscaler = MinMaxScaler()
+norm = mscaler.fit_transform(df)
+sscaler = StandardScaler()
+stand = sscaler.fit_transform(df)
+print(norm)
+print(stand)
+
+print(df)
 
 # Scipy
 # U, s, V = svds(df.to_numpy().astype(np.double), 100, return_singular_vectors=True)
@@ -60,27 +67,25 @@ print(type(df))
 
 # svd
 
-svd = TruncatedSVD(df)
-cross_validate(
-    svd,
-)
-
-# U, s, V = randomized_svd(df.to_numpy(), n_components=100)
-# print(U.shape)
-# # get predictions
-# diag = np.diag(s)
-# pred = np.dot(np.dot(U, diag), V)
-# preds_df = pd.DataFrame(pred, columns=df.columns, index=df.index)
-# print(preds_df.loc["1% Lowfat Milk"].sort_values(ascending=False))
-# predict = pd.DataFrame(
-#     index=data.product_name_x.unique(), columns=data.product_name_y.unique()
+# svd = TruncatedSVD(df)
+# cross_validate(
+#     svd,
 # )
-# # create prediction matrix
-# for x in data.product_name_x.unique():
-#     for y in data.product_name_y.unique():
-#         predict.at[x, y] = preds_df.loc[x][y]
-# print(predict)
-# print(mean_squared_error(df.to_numpy(), predict.to_numpy()))
+
+U, s, V = randomized_svd(df.to_numpy(), n_components=100)
+print(U.shape)
+# get predictions
+diag = np.diag(s)
+pred = np.dot(np.dot(U, diag), V)
+preds_df = pd.DataFrame(pred, columns=df.columns, index=df.index)
+print(preds_df.loc["tortillas flat bread"].sort_values(ascending=False))
+predict = pd.DataFrame(index=data.aisle_x.unique(), columns=data.aisle_y.unique())
+# create prediction matrix
+for x in data.aisle_x.unique():
+    for y in data.aisle_y.unique():
+        predict.at[x, y] = preds_df.loc[x][y]
+print(predict)
+print(mean_squared_error(df.to_numpy(), predict.to_numpy(), squared=False))
 
 
 # SURPRISE METHOD
