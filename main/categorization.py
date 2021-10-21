@@ -1,5 +1,7 @@
 import pandas as pd
 
+# CATEGORIZE PRODUCTS
+
 # data = pd.read_csv("csv/total.csv")
 # data = data.product_name.unique()
 

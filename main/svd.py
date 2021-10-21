@@ -60,22 +60,29 @@ print(type(df))
 
 # svd
 
-U, s, V = randomized_svd(df.to_numpy(), n_components=100)
-print(U.shape)
-# get predictions
-diag = np.diag(s)
-pred = np.dot(np.dot(U, diag), V)
-preds_df = pd.DataFrame(pred, columns=df.columns, index=df.index)
-print(preds_df.loc["1% Lowfat Milk"].sort_values(ascending=False))
-predict = pd.DataFrame(
-    index=data.product_name_x.unique(), columns=data.product_name_y.unique()
+svd = TruncatedSVD(df)
+cross_validate(
+    svd,
 )
-# create prediction matrix
-for x in data.product_name_x.unique():
-    for y in data.product_name_y.unique():
-        predict.at[x, y] = preds_df.loc[x][y]
-print(predict)
-print(mean_squared_error(df.to_numpy(), predict.to_numpy()))
+
+# U, s, V = randomized_svd(df.to_numpy(), n_components=100)
+# print(U.shape)
+# # get predictions
+# diag = np.diag(s)
+# pred = np.dot(np.dot(U, diag), V)
+# preds_df = pd.DataFrame(pred, columns=df.columns, index=df.index)
+# print(preds_df.loc["1% Lowfat Milk"].sort_values(ascending=False))
+# predict = pd.DataFrame(
+#     index=data.product_name_x.unique(), columns=data.product_name_y.unique()
+# )
+# # create prediction matrix
+# for x in data.product_name_x.unique():
+#     for y in data.product_name_y.unique():
+#         predict.at[x, y] = preds_df.loc[x][y]
+# print(predict)
+# print(mean_squared_error(df.to_numpy(), predict.to_numpy()))
+
+
 # SURPRISE METHOD
 # Item x Item
 
