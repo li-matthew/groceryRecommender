@@ -1,6 +1,6 @@
 import pandas as pd
 
-# create full data file
+# CREATE FULL DATA FILE
 data = pd.read_csv("/Users/matthewli/Downloads/instacart/orders.csv")
 products = pd.read_csv("/Users/matthewli/Downloads/instacart/products.csv")
 departments = pd.read_csv("/Users/matthewli/Downloads/instacart/departments.csv")

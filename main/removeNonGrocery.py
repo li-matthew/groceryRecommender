@@ -2,6 +2,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# REMOVE NON GROCERY PRODUCTS
+
 data = pd.read_csv("csv/total.csv")
 products = pd.read_csv("/Users/matthewli/Downloads/instacart/products.csv")
 departments = pd.read_csv("/Users/matthewli/Downloads/instacart/departments.csv")

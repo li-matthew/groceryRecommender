@@ -11,6 +11,8 @@ from surprise import Reader
 from surprise import Dataset
 from surprise import KNNBasic
 
+# CREATE MATRIX PAIRING PRODUCTS TOGETHER
+
 data = pd.read_csv("csv/test.csv")
 print(data)
 print(len(data.product_name.unique()))

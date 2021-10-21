@@ -22,3 +22,9 @@ I believe this method will help to bring out each user’s individual preference
 Read data
 categorize data
 map relationship between items based on purchases
+compute predicted values
+
+#TODO
+standardize data (subtract mean etc)
+calculate RMSE
+Perfrom gradient descent
