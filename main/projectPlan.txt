@@ -29,6 +29,7 @@ standardize data (subtract mean etc)
 PCA+randomforest?
 cross validation
 calculate RMSE
-Perfrom gradient descent
+Perform gradient descent
+
 graphs with r
 weight????

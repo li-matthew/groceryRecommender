@@ -37,6 +37,7 @@ print(norm)
 print(stand)
 
 print(df)
+df.to_csv("csv/matrix.csv")
 
 # Scipy
 # U, s, V = svds(df.to_numpy().astype(np.double), 100, return_singular_vectors=True)
