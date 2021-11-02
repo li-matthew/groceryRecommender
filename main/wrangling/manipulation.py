@@ -2,7 +2,7 @@ import pandas as pd
 
 # CREATE MATRIX PAIRING PRODUCTS TOGETHER
 
-data = pd.read_csv("csv/total.csv")
+data = pd.read_csv("../csv/test.csv")
 print(data)
 print(len(data.product_name.unique()))
 
@@ -15,7 +15,7 @@ df = data.drop(
         "user_id",
         "order_number",
         "order_hour_of_day",
-        "product_name",
+        "aisle",
     ],
     axis=1,
 )
@@ -27,7 +27,7 @@ for group in df:
     temp = group[1]
     x = (
         pd.merge(group[1].assign(key=1), group[1].assign(key=1), on="order_id")
-        .query("aisle_x < aisle_y")
+        .query("product_name_x < product_name_y")
         .drop(columns=["order_id"])
     )
     list.append(x)
@@ -52,12 +52,12 @@ total = total.drop(
 print(total)
 
 # Sort data
-a = total[["aisle_x", "aisle_y"]].values
+a = total[["product_name_x", "product_name_y"]].values
 a.sort(axis=1)
 newtotal = pd.DataFrame(a, total.index, total.columns)
 newtotal["match"] = match
-newtotal = newtotal.sort_values(["aisle_x", "aisle_y"])
+newtotal = newtotal.sort_values(["product_name_x", "product_name_y"])
 
-newtotal = newtotal.groupby(["aisle_x", "aisle_y"]).sum().reset_index()
+newtotal = newtotal.groupby(["product_name_x", "product_name_y"]).sum().reset_index()
 print(newtotal)
-newtotal.to_csv("csv/manipulated.csv", index=False)
+newtotal.to_csv("../csv/manipulated.csv", index=False)
