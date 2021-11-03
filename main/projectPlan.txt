@@ -13,6 +13,8 @@ I will plot the results of each iteration and use that data to determine which h
 By incrementally adjusting weights for prediction, I think that I can get an even more calibrated algorithm that can perform predictions with minimal error. 
 In the end, I plan to measure my success using my resulting RMSE value, which I will then compare with previous values I will calculate in between steps of my plan to improve my algorithm.
 
+## WHY IS IT DIFFERENT NOW
+
 Read data
 categorize data
 map relationship between items based on purchases
