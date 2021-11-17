@@ -2,7 +2,7 @@ import pandas as pd
 
 # CREATE MATRIX PAIRING PRODUCTS TOGETHER
 
-data = pd.read_csv("../csv/test.csv")
+data = pd.read_csv("../csv/test2.csv")
 print(data)
 print(len(data.product_name.unique()))
 
@@ -31,6 +31,7 @@ for group in df:
         .drop(columns=["order_id"])
     )
     list.append(x)
+    print(len(list))
 total = pd.concat(list)
 print(total)
 # Create score for each match
@@ -60,4 +61,4 @@ newtotal = newtotal.sort_values(["product_name_x", "product_name_y"])
 
 newtotal = newtotal.groupby(["product_name_x", "product_name_y"]).sum().reset_index()
 print(newtotal)
-newtotal.to_csv("../csv/manipulated.csv", index=False)
+newtotal.to_csv("../csv/testmanipulated.csv", index=False)
