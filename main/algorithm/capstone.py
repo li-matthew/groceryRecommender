@@ -101,6 +101,11 @@ for (trainset, testset) in cv:
     for u, ur in iteritems(trainset[0]):
         for i, r in ur:
             allRatings.append((u, i, r))
+    temp = []
+    for u, i, r in allRatings:
+        temp.append(r)
+    mean = np.mean(temp)
+    print(mean)
     for epoch in range(epochs):
         e = []
         for u, i, r in allRatings:
@@ -108,9 +113,9 @@ for (trainset, testset) in cv:
             dot = 0  # <q_i, p_u>
             for f in range(components):
                 dot += qi[i, f] * pu[u, f]
-            err = r - (bu[u] + bi[i] + dot)
-            print(err * err)
-            e.append(err)
+            err = r - (mean + bu[u] + bi[i] + dot)
+            # print(err * err)
+            e.append(err * err)
 
             # update biases
             bu[u] += lr * (err - reg * bu[u])
@@ -125,7 +130,7 @@ for (trainset, testset) in cv:
         mse = np.mean(e)
         rmse = np.sqrt(mse)
         sgde.append(rmse)
-        print(rmse)
+        # print(rmse)
 
     predictions = []
     for (uid, iid, ui) in testset:
@@ -172,7 +177,8 @@ for (trainset, testset) in cv:
     measures["mae"] = mae
     print(measures)
     foldCount += 1
-
+    print(sgde)
+    print(np.mean(sgde))
 # Predictions
 # topn = []
 # # for y in datas.product_name_y.unique():

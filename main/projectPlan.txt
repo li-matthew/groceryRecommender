@@ -1,4 +1,4 @@
-I will apply dimensionality reduction using the matrix factorization method SVD, and compare the accuracies of both methods. 
+I will apply dimensionality reduction using the matrix factorization method SVD
 Both methods are provided in Python’s sci-kit library which will be useful. 
 For this project, I plan to use k-fold cross validation to obtain accuracy. 
 With this method, I do not have to initially split my data into a testing and training set and can instead run cross validation multiple times 
@@ -17,11 +17,9 @@ Read data
 categorize data
 map relationship between items based on purchases
 compute predicted values
-standardize data (subtract mean etc)
-
-#TODO
 cross validation
 calculate RMSE
-Perform gradient descent
 
+#TODO
+Perform gradient descent
 graphs with r

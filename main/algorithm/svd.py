@@ -51,34 +51,34 @@ df = df.fillna(0)
 #
 # Scikit
 # find number of components
-y = []
-temp = 0
-init = 0
-while temp < 0.9:
-    init = init + 1
-    svd = TruncatedSVD(n_components=init)
-    svd.fit(df)
-    transformed = svd.transform(df)
-    # print(transformed)
-    # print(svd.explained_variance_ratio_)
-    y.append(svd.explained_variance_ratio_.sum())
-    temp = svd.explained_variance_ratio_.sum()
+# y = []
+# temp = 0
+# init = 0
+# while temp < 0.9:
+#     init = init + 1
+#     svd = TruncatedSVD(n_components=init)
+#     svd.fit(df)
+#     transformed = svd.transform(df)
+#     # print(transformed)
+#     # print(svd.explained_variance_ratio_)
+#     y.append(svd.explained_variance_ratio_.sum())
+#     temp = svd.explained_variance_ratio_.sum()
 
-print(init)
+# print(init)
 
 # sns.scatterplot(range(1, init), y)
 # sns.scatterplot(data=svd.singular_values_)
 # plt.show()
 
-print(svd.singular_values_)
-sv = pd.DataFrame(svd.singular_values_)
-sv.index += 1
-print(sv)
-sv.to_csv("../csv/sv.csv")
-components = pd.DataFrame(y)
-components.index += 1
-print(components)
-components.to_csv("../csv/components.csv")
+# print(svd.singular_values_)
+# sv = pd.DataFrame(svd.singular_values_)
+# sv.index += 1
+# print(sv)
+# sv.to_csv("../csv/sv.csv")
+# components = pd.DataFrame(y)
+# components.index += 1
+# print(components)
+# components.to_csv("../csv/components.csv")
 
 
 # svd
@@ -107,10 +107,12 @@ components.to_csv("../csv/components.csv")
 # SURPRISE METHOD
 # Item x Item
 
-# reader = Reader(rating_scale=(1, data["match"].max()))
-# dataset = Dataset.load_from_df(data[["aisle_x", "aisle_y", "match"]], reader)
-# algo = SVD()
-# cross_validate(algo, dataset, measures=["RMSE", "MAE"], cv=5, verbose=True)
+reader = Reader(rating_scale=(1, data["match"].max()))
+dataset = Dataset.load_from_df(
+    data[["product_name_x", "product_name_y", "match"]], reader
+)
+algo = SVD()
+cross_validate(algo, dataset, measures=["RMSE", "MAE"], cv=5, verbose=True)
 
 # # Predictions
 # topn = []

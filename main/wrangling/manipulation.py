@@ -2,7 +2,7 @@ import pandas as pd
 
 # CREATE MATRIX PAIRING PRODUCTS TOGETHER
 
-data = pd.read_csv("../csv/test2.csv")
+data = pd.read_csv("../csv/test.csv")
 print(data)
 print(len(data.product_name.unique()))
 
